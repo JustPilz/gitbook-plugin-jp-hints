@@ -1,0 +1,139 @@
+<title>Toastr</title>
+<style>
+#toast-container > div {
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 1rem;
+line-height: 1.5;
+    position: relative;
+    pointer-events: auto;
+    overflow: hidden;
+    margin: 0 0 6px;
+    padding: 15px 15px 15px 50px;
+    /* width: 300px; */
+    border-radius: 3px 3px 3px 3px;
+    background-position: 15px center;
+    /* box-shadow: 0 0 12px #999999; */
+    box-shadow: 0 0 3px #999999;
+    color: #ffffff;
+    opacity: 0.8;
+}
+
+.toast-success {
+    background-repeat: no-repeat;
+    background-color: #51a351;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADsSURBVEhLY2AYBfQMgf///3P8+/evAIgvA/FsIF+BavYDDWMBGroaSMMBiE8VC7AZDrIFaMFnii3AZTjUgsUUWUDA8OdAH6iQbQEhw4HyGsPEcKBXBIC4ARhex4G4BsjmweU1soIFaGg/WtoFZRIZdEvIMhxkCCjXIVsATV6gFGACs4Rsw0EGgIIH3QJYJgHSARQZDrWAB+jawzgs+Q2UO49D7jnRSRGoEFRILcdmEMWGI0cm0JJ2QpYA1RDvcmzJEWhABhD/pqrL0S0CWuABKgnRki9lLseS7g2AlqwHWQSKH4oKLrILpRGhEQCw2LiRUIa4lwAAAABJRU5ErkJggg==") !important;
+}
+
+.toast-info {
+    background-repeat: no-repeat;
+    background-color: #2f96b4;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGwSURBVEhLtZa9SgNBEMc9sUxxRcoUKSzSWIhXpFMhhYWFhaBg4yPYiWCXZxBLERsLRS3EQkEfwCKdjWJAwSKCgoKCcudv4O5YLrt7EzgXhiU3/4+b2ckmwVjJSpKkQ6wAi4gwhT+z3wRBcEz0yjSseUTrcRyfsHsXmD0AmbHOC9Ii8VImnuXBPglHpQ5wwSVM7sNnTG7Za4JwDdCjxyAiH3nyA2mtaTJufiDZ5dCaqlItILh1NHatfN5skvjx9Z38m69CgzuXmZgVrPIGE763Jx9qKsRozWYw6xOHdER+nn2KkO+Bb+UV5CBN6WC6QtBgbRVozrahAbmm6HtUsgtPC19tFdxXZYBOfkbmFJ1VaHA1VAHjd0pp70oTZzvR+EVrx2Ygfdsq6eu55BHYR8hlcki+n+kERUFG8BrA0BwjeAv2M8WLQBtcy+SD6fNsmnB3AlBLrgTtVW1c2QN4bVWLATaIS60J2Du5y1TiJgjSBvFVZgTmwCU+dAZFoPxGEEs8nyHC9Bwe2GvEJv2WXZb0vjdyFT4Cxk3e/kIqlOGoVLwwPevpYHT+00T+hWwXDf4AJAOUqWcDhbwAAAAASUVORK5CYII=") !important;
+}
+
+.toast-warning {
+    background-repeat: no-repeat;
+    background-color: #f89406;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAdVBMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////li2ZAAAAAJnRSTlMA7ib5Ew4D4trU0c62qJ+YgXNgTzUjGBEI8d7Kw72OiXpsRD8uH4QSvlcAAACYSURBVCjPdctXEoJAAATRQQRzJJpz3/+IrssKCOv7m+oatcyP8hpA6g0nmMkjxbh7wgFjrJ4HVtILE6yROhKcbSeMgPUGCPRjixELY6O2AGNQYISxGjdsGPKxVi3etUNY1uFKO3CWU4ZYWUSlcOFCJRKVpawIZzrDyW1Y0bOQkddT4iszYVGvZfOdSy+8npritdck8BrrnzfApiXMd7La4AAAAABJRU5ErkJggg==") !important;
+}
+
+.toast-error {
+    background-repeat: no-repeat;
+    background-color: #bd362f;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHOSURBVEhLrZa/SgNBEMZzh0WKCClSCKaIYOED+AAKeQQLG8HWztLCImBrYadgIdY+gIKNYkBFSwu7CAoqCgkkoGBI/E28PdbLZmeDLgzZzcx83/zZ2SSXC1j9fr+I1Hq93g2yxH4iwM1vkoBWAdxCmpzTxfkN2RcyZNaHFIkSo10+8kgxkXIURV5HGxTmFuc75B2RfQkpxHG8aAgaAFa0tAHqYFfQ7Iwe2yhODk8+J4C7yAoRTWI3w/4klGRgR4lO7Rpn9+gvMyWp+uxFh8+H+ARlgN1nJuJuQAYvNkEnwGFck18Er4q3egEc/oO+mhLdKgRyhdNFiacC0rlOCbhNVz4H9FnAYgDBvU3QIioZlJFLJtsoHYRDfiZoUyIxqCtRpVlANq0EU4dApjrtgezPFad5S19Wgjkc0hNVnuF4HjVA6C7QrSIbylB+oZe3aHgBsqlNqKYH48jXyJKMuAbiyVJ8KzaB3eRc0pg9VwQ4niFryI68qiOi3AbjwdsfnAtk0bCjTLJKr6mrD9g8iq/S/B81hguOMlQTnVyG40wAcjnmgsCNESDrjme7wfftP4P7SP4N3CJZdvzoNyGq2c/HWOXJGsvVg+RA/k2MC/wN6I2YA2Pt8GkAAAAASUVORK5CYII=") !important;
+}
+
+
+
+.jp-hints.toastr.warning{
+    background-color: #f89406;
+}
+
+.jp-hints.toastr.warning h4 {
+    display: none;
+}
+
+
+
+.jp-hints.toastr.warning > .jp-hints-icon {
+    background-repeat: no-repeat;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAdVBMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////li2ZAAAAAJnRSTlMA7ib5Ew4D4trU0c62qJ+YgXNgTzUjGBEI8d7Kw72OiXpsRD8uH4QSvlcAAACYSURBVCjPdctXEoJAAATRQQRzJJpz3/+IrssKCOv7m+oatcyP8hpA6g0nmMkjxbh7wgFjrJ4HVtILE6yROhKcbSeMgPUGCPRjixELY6O2AGNQYISxGjdsGPKxVi3etUNY1uFKO3CWU4ZYWUSlcOFCJRKVpawIZzrDyW1Y0bOQkddT4iszYVGvZfOdSy+8npritdck8BrrnzfApiXMd7La4AAAAABJRU5ErkJggg==") !important;
+}
+
+
+
+
+
+
+.hint {
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 1rem;
+line-height: 1.5;
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 6px;
+    padding: 15px 15px 15px 50px;
+    /* width: 300px; */
+    border-radius: 3px 3px 3px 3px;
+    background-position: 15px center;
+    /* box-shadow: 0 0 12px #999999; */
+    box-shadow: 0 0 3px #999999;
+    color: #ffffff;
+    opacity: 0.8;
+}
+
+.hint-icon {
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAdVBMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////li2ZAAAAAJnRSTlMA7ib5Ew4D4trU0c62qJ+YgXNgTzUjGBEI8d7Kw72OiXpsRD8uH4QSvlcAAACYSURBVCjPdctXEoJAAATRQQRzJJpz3/+IrssKCOv7m+oatcyP8hpA6g0nmMkjxbh7wgFjrJ4HVtILE6yROhKcbSeMgPUGCPRjixELY6O2AGNQYISxGjdsGPKxVi3etUNY1uFKO3CWU4ZYWUSlcOFCJRKVpawIZzrDyW1Y0bOQkddT4iszYVGvZfOdSy+8npritdck8BrrnzfApiXMd7La4AAAAABJRU5ErkJggg==") !important;
+}
+
+
+.warning{
+    background-color: #f89406;
+}
+
+
+</style>
+
+
+<!--
+<div class="jp-hints toastr warning">
+    <div class="jp-hints-icon">
+    <h4>Ahtung nonwshainer!</h4>
+    Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</div>
+</div>
+
+-->
+
+<div class="hint warning">
+    <div class="hint-icon"></div>
+    <h4>Ahtung nonwshainer!</h4>
+    Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.
+</div>
+
+
+
+
+<div id="toast-container" class="toast-top-right" aria-live="polite" role="alert">
+    <div class="toast toast-success">
+        <div class="toast-message">My name is Inigo Montoya. You killed my father. Prepare to die!</div>
+    </div>
+</div>
+<div id="toast-container" class="toast-top-right" aria-live="polite" role="alert">
+    <div class="toast toast-info">
+        <div class="toast-message">Are you the six fingered man?</div>
+    </div>
+</div>
+<div id="toast-container" class="toast-top-right" aria-live="polite" role="alert">
+    <div class="toast toast-warning">
+        <div class="toast-message">Inconceivable!</div>
+    </div>
+</div>
+<div id="toast-container" class="toast-top-right" aria-live="polite" role="alert">
+    <div class="toast toast-error">
+        <div class="toast-message">I do not think that means what you think it means.</div>
+    </div>
+</div>
+
+

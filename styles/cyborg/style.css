@@ -1,0 +1,68 @@
+.jp-hints {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    position: relative;
+    font-weight: 500;
+    line-height: 1.1;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.jp-hints.warning {
+
+    background-color: #ff8800;
+    border-color: #f05800;
+    color: #ffffff;
+
+}
+
+.jp-hints.danger {
+    background-color: #cc0000;
+    border-color: #bd001f;
+    color: #ffffff;
+}
+
+.jp-hints.success {
+    background-color: #77b300;
+    border-color: #809a00;
+    color: #ffffff;
+}
+
+.jp-hints.info {
+    background-color: #9933cc;
+    border-color: #6e2caf;
+    color: #ffffff;
+}
+
+
+.jp-hints.primary {
+    background-color: #2a9fd6;
+    border-color: #2a9fd6;
+    color: #ffffff;
+}
+
+.jp-hints.default {
+    background-color: #424242;
+    border-color: #424242;
+    color: #ffffff;
+}
+
+
+.jp-hints > p {
+    margin: 0;
+}
+
+
+.jp-hints a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.jp-hints h4 {
+    font-size: 24px;
+    margin-top: 0;
+    color: inherit;
+    margin-bottom: 10px;
+}

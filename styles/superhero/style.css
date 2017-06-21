@@ -1,0 +1,75 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('../Fonts/Lato-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.jp-hints {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #ffffff;
+    position: relative;
+    font-weight: 300;
+    line-height: 1.1;
+    padding: 15px;
+    margin-bottom: 21px;
+    border: 1px solid transparent;
+    border-radius: 0;
+}
+
+.jp-hints.warning {
+    background-color: #f0ad4e;
+    border-color: transparent;
+    color: #ffffff;
+}
+
+.jp-hints.danger {
+    background-color: #d9534f;
+    border-color: transparent;
+    color: #ffffff;
+}
+
+.jp-hints.success {
+    background-color: #5cb85c;
+    border-color: transparent;
+    color: #ffffff;
+}
+
+.jp-hints.info {
+    background-color: #5bc0de;
+    border-color: transparent;
+    color: #ffffff;
+}
+
+.jp-hints.primary {
+    background-color: #df691a;
+    border-color: transparent;
+    color: #ffffff;
+}
+
+.jp-hints.default {
+    background-color: #4e5d6c;
+    border-color: transparent;
+    color: #ffffff;
+}
+
+
+.jp-hints > p {
+    margin: 0;
+}
+
+
+.jp-hints a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.jp-hints h4 {
+    font-weight: 300;
+    font-size: 19px;
+    margin-top: 0;
+    color: inherit;
+    margin-bottom: 10px;
+}
